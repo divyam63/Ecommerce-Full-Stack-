@@ -1,5 +1,6 @@
 import express from "express";
 import { getAllProducts,createProduct, updateProduct, deleteProduct, getProductDetail } from "../controllers/productController.js";
+import { isAuthenticatedUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -7,7 +8,8 @@ const router = express.Router();
 // the route paths (/product, /product/new, etc.)
 //  to base url  "http://localhost:5000/api".
 
-router.route("/product").get(getAllProducts);
+router.route("/product").get(isAuthenticatedUser, getAllProducts);  // if person get loginned 
+// then get only get all 
 
 router.route("/product/new").post(createProduct);
 

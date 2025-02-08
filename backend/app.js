@@ -7,9 +7,14 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+//
+import cookieParser from "cookie-parser";
+app.use(cookieParser());
+
 // Route imports
 import product from "./routes/productRoute.js"; 
 import user from "./routes/userRoute.js";
+import cookieParser from "cookie-parser";
 app.use("/api/v1", product);
 app.use("/api/v1", user);
 

@@ -28,7 +28,7 @@ export const loginUser=asyncHandler(async(req,res,next)=>{
         return next(new Error("Please enter email and password"));
     }
 
-    const user =await User.findOne({email}).select("+password");
+    const user =await User.findOne({email}).select("+password");  //password false hai
 
     if(!user){
         return next(new Error("invalid email or password"));
@@ -48,4 +48,19 @@ export const loginUser=asyncHandler(async(req,res,next)=>{
         token
     });
 
+})
+
+//LOGOUT USER
+
+export const logout= asyncHandler(async(req,res,next)=>{
+    req.cookie("token",null,{
+        expires : new Date (Date.now()),
+        httpOnly :true,
+    });
+
+    res.status(200).json({
+        succees: true,
+        message:"logged out successfully";
+
+    })
 })
