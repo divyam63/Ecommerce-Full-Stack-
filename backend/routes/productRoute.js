@@ -8,12 +8,14 @@ const router = express.Router();
 // the route paths (/product, /product/new, etc.)
 //  to base url  "http://localhost:5000/api".
 
-router.route("/product").get(isAuthenticatedUser, getAllProducts);  // if person get loginned 
+router.route("/product").get(getAllProducts);  // if person get loginned 
 // then get only get all 
 
-router.route("/product/new").post(createProduct);
+router.route("/product/new").post(isAuthenticatedUser,createProduct);
 
-router.route("/product/:id").put(updateProduct).delete(deleteProduct).get(getProductDetail);
+router.route("/product/:id").put(isAuthenticatedUser,updateProduct)
+.delete(isAuthenticatedUser,deleteProduct)
+.get(getProductDetail);
 
 export default router;
 

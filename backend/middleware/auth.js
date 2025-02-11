@@ -1,5 +1,5 @@
-import User from "../models/userModel";
-import asyncHandler from "../utils/asyncHandler"
+import User from "../models/userModel.js";
+import asyncHandler from "../utils/asyncHandler.js"
 
 
 export const isAuthenticatedUser = asyncHandler(async(req,res,next) => {
