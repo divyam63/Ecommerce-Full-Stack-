@@ -1,6 +1,6 @@
 import express from "express";
 import { getAllProducts,createProduct, updateProduct, deleteProduct, getProductDetail } from "../controllers/productController.js";
-import { isAuthenticatedUser } from "../middleware/auth.js";
+import { authorisedRole, isAuthenticatedUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.route("/product").get(getAllProducts);  // if person get loginned
 
 router.route("/product/new").post(isAuthenticatedUser,createProduct);
 
-router.route("/product/:id").put(isAuthenticatedUser,updateProduct)
+router.route("/product/:id").put(isAuthenticatedUser,authorisedRole("admin"),updateProduct)
 .delete(isAuthenticatedUser,deleteProduct)
 .get(getProductDetail);
 

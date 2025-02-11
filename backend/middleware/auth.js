@@ -16,3 +16,13 @@ export const isAuthenticatedUser = asyncHandler(async(req,res,next) => {
 
     next();
 })
+
+export const authorisedRole= (...roles)=>{
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {  // for array of words which u allow
+            //we store in usermodel////
+            return next(new Error(`Role (${req.user.role}) is not allowed to access this resource`, 403));
+        }
+        next();  // sign to pass next
+    }
+}
