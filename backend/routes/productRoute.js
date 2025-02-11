@@ -11,10 +11,10 @@ const router = express.Router();
 router.route("/product").get(getAllProducts);  // if person get loginned 
 // then get only get all 
 
-router.route("/product/new").post(isAuthenticatedUser,createProduct);
+router.route("/product/new").post(isAuthenticatedUser,authorisedRole("admin"),createProduct);
 
 router.route("/product/:id").put(isAuthenticatedUser,authorisedRole("admin"),updateProduct)
-.delete(isAuthenticatedUser,deleteProduct)
+.delete(isAuthenticatedUser,authorisedRole("admin"),deleteProduct)
 .get(getProductDetail);
 
 export default router;

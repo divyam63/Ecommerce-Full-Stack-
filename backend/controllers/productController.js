@@ -8,8 +8,9 @@ import asyncHandler from "../utils/asyncHandler.js";
 // Create product  -->only admin
 
 export const createProduct = asyncHandler(async (req, res, next) => {
+    req.body.user=req.user.id;  //user ka nam id ho jayega
+
     console.log("Request Body:", req.body); // Add this line
-    
         const product = await Product.create(req.body);
 
         res.status(201).json({
